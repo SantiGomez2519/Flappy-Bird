@@ -1,4 +1,4 @@
-import pygame, screen, player
+import pygame, screen, player, pipe
 
 
 class Game:
@@ -7,6 +7,7 @@ class Game:
         self.player = player.Player()
         self.screen.set_screen()
         self.player.draw(self.screen.screen)
+        self.pipe = pipe.Pipe()
 
 
     def game_running(self):
@@ -17,13 +18,16 @@ class Game:
                 if event.type == pygame.QUIT:
                     self.screen.running = False
 
-            # Clear the screen
-            self.screen.screen.fill(self.screen.background)
+            # Draw the backgrond
+            self.screen.screen.blit(self.screen.background, (0, 0))
 
             # Draw the player
             self.player.draw(self.screen.screen)
-            self.player.move()
+            self.player.move(self.screen)
 
+            # Draw the pipe
+            self.pipe.draw(self.screen.screen)
+            self.pipe.move()
             
 
             # flip() the display to put your work on screen
